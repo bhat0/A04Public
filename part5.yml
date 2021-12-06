@@ -1,3 +1,7 @@
+- name: Checking the repo out 
+     git:
+       repo: https://github.com/gourteacher/Assignment4CodeBase.git
 
-
- 
+       dest: 
+       clone: yes
+       update: yes
