@@ -1,3 +1,13 @@
+---
+-  name: Update the dependencies
+   run: sudo apt update
+
+- name: Python installation
+  run: sudo apt-get install
+
+-  name: execution of pip
+   run : sudo apt install python3-pip
+   
 - name: Checking the repo out 
      git:
        repo: https://github.com/gourteacher/Assignment4CodeBase.git
