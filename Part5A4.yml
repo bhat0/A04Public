@@ -1,0 +1,56 @@
+---
+
+ - name: "Playing with Ansible and Git"
+   hosts: localhost
+   connection: local
+   become: yes
+
+
+
+   tasks:
+     - name: installing git
+       apt:
+          name: git
+          state: present
+          update_cache: yes
+
+
+
+     - name: Update the dependencies
+
+       command: sudo apt-get update
+
+     - name: Python installation
+       command: sudo apt-get install python3
+
+     - name: execution of pip
+       apt:
+               name: python3-pip
+               state: latest
+
+
+     - name: install flask
+       command: pip install flask
+
+     - name: Checking the repo out
+       git:
+         repo: https://github.com/gourteacher/Assignment4CodeBase.git
+         dest: /home/net2008/A04P5/
+         clone: yes
+         update: yes
+     - name: run app.py
+       shell: |
+               /home/net2008/A04P5/
+               python3 app.py
+       async: 10
+       poll: 0
+
+     - name: checking if connected
+       uri:
+         url: http://10.0.0.4:5000/interfaces
+         return_content: yes
+       register: curl
+     - debug:
+          var: curl.json
+
+
